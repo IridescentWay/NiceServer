@@ -7,10 +7,11 @@ set(source_dir "${PROJECT_SOURCE_DIR}/src/")
 
 file(GLOB_RECURSE source_files "${source_dir}/*.*")
 
-find_package(Boost 1.65 REQUIRED COMPONENTS filesystem system)
+include_directories(
+    src/http_connection
+    src/server
+    src/utils
+)
 
-if(Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIRS})
-    add_executable(NiceServer ${source_files})
-    target_link_libraries(NiceServer pthread mysqlclient ${Boost_LIBRARIES})
-endif()
+add_executable(NiceServer ${source_files})
+target_link_libraries(NiceServer pthread mysqlclient ${Boost_LIBRARIES})
