@@ -98,6 +98,7 @@ void ConnectionHandler::processRead(ConnectionHandler &handler) {
         handler.close_connection();
         return;
     }
+    printf("\n%p %p %p\n", handler.get_read_buffer(), handler.read_buffer_, reinterpret_cast<ConnectionHandler *>(handler.parser_.data)->get_read_buffer());
     handler.parser_execute(handler.read_buffer_, handler.read_idx_);
     if (handler.parser_.http_errno != HPE_OK) {
         handler.close_connection();
